@@ -90,6 +90,7 @@ public class ArticleController {
 	}
 	
 	// 삭제 처리
+	@RequestMapping(value = "/remove", method = RequestMethod.POST)
 	public String remove(@RequestParam("article_no") int article_no, RedirectAttributes redirectAttributes) throws Exception {
 		
 		logger.info("remove ...");
