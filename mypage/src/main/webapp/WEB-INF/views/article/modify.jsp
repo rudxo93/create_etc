@@ -38,64 +38,38 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		<!-- Main content -->
 		<div class="content">
 			<div class="container-fluid">
-				<div class="row">
-					<div class="col-lg-6">
-						<div class="card">
-							<div class="card-body">
-								<h5 class="card-title">Card title</h5>
-
-								<p class="card-text">
-									Some quick example text to build on the card title and make up the bulk of the card's
-									content.
-								</p>
-
-								<a href="#" class="card-link">Card link</a>
-								<a href="#" class="card-link">Another link</a>
-							</div>
-						</div>
-
-						<div class="card card-primary card-outline">
-							<div class="card-body">
-								<h5 class="card-title">Card title</h5>
-
-								<p class="card-text">
-									Some quick example text to build on the card title and make up the bulk of the card's
-									content.
-								</p>
-								<a href="#" class="card-link">Card link</a>
-								<a href="#" class="card-link">Another link</a>
-							</div>
-						</div><!-- /.card -->
-					</div>
-					<!-- /.col-md-6 -->
-					<div class="col-lg-6">
+				<div class="col-lg-12">
+					<form role="form" id="writeForm" method="post" action="${path}/article/modify">
 						<div class="card">
 							<div class="card-header">
-								<h5 class="m-0">Featured</h5>
+								<h3 class="card-title">게시글 작성</h3>
 							</div>
 							<div class="card-body">
-								<h6 class="card-title">Special title treatment</h6>
-
-								<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-								<a href="#" class="btn btn-primary">Go somewhere</a>
+								<input type="hidden" name="article_no" value="${article.article_no}">
+								<div class="form-group">
+									<label for="title">제목</label>
+									<input class="form-control" id="title" name="title" placeholder="제목을 입력해주세요" value="${article.title}">
+								</div>
+								<div class="form-group">
+									<label for="content">내용</label>
+									<textarea class="form-control" id="content" name="content" rows="30"
+													placeholder="내용을 입력해주세요" style="resize: none;">${article.content}</textarea>
+								</div>
+								<div class="form-group">
+									<label for="writer">작성자</label>
+									<input class="form-control" id="writer" name="writer" value="${article.writer}" readonly>
+								</div>
+							</div>
+							<div class="card-footer">
+								<button type="button" class="btn btn-primary"><i class="fa fa-list"></i> 목록</button>
+								<div class="float-right"> 
+									<button type="button" class="btn btn-warning cancelBtn"><i class="fa fa-trash"></i> 취소</button>
+									<button type="submit" class="btn btn-success modBtn"><i class="fa fa-save"></i> 수정 저장</button>
+								</div>
 							</div>
 						</div>
-
-						<div class="card card-primary card-outline">
-							<div class="card-header">
-								<h5 class="m-0">Featured</h5>
-							</div>
-							<div class="card-body">
-								<h6 class="card-title">Special title treatment</h6>
-
-								<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-								<a href="#" class="btn btn-primary">Go somewhere</a>
-							</div>
-						</div>
-					</div>
-					<!-- /.col-md-6 -->
+					</form>
 				</div>
-				<!-- /.row -->
 			</div><!-- /.container-fluid -->
 		</div>
 		<!-- /.content -->
@@ -119,5 +93,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- REQUIRED SCRIPTS -->
 	<%@include file="../include/plugin_js.jsp" %>
+	
+	<script>
+		$(document).ready(function () {
+			
+			var formObj = $("form[role='form']");
+			console.log(formObj);
+			
+			$(".modBtn").on("click", function () { 
+				formObj.submit();
+			});
+			
+			$(".cancelBtn").on("click", function () {
+				history.go(-1);
+			});
+			
+			$(".listBtn").on("click", function () {
+				self.location = "${path}/article/list"
+			});
+		});
+
+	</script>
 </body>
 </html>

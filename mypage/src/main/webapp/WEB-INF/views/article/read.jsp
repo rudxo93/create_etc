@@ -38,64 +38,35 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		<!-- Main content -->
 		<div class="content">
 			<div class="container-fluid">
-				<div class="row">
-					<div class="col-lg-6">
-						<div class="card">
-							<div class="card-body">
-								<h5 class="card-title">Card title</h5>
-
-								<p class="card-text">
-									Some quick example text to build on the card title and make up the bulk of the card's
-									content.
-								</p>
-
-								<a href="#" class="card-link">Card link</a>
-								<a href="#" class="card-link">Another link</a>
+				<div class="col-lg-12">
+					<div class="card">
+						<div class="card-header">
+							<h3 class="card-title">글제목 : ${article.title}</h3>
+						</div>
+						<div class="card-body" style="height: 700px">
+							${article.content}
+						</div>
+						<div class="card-footer">
+							<div class="user-block">
+								<img class="img-circle img-bordered-sm" src="${path}/dist/img/user1-128x128.jpg" alt="user image">
+								<span class="username">
+									<a href="#">${article.writer}</a>
+								</span>
+								<span class="description"><fmt:formatDate pattern="yyyy-MM-dd" value="${article.regDate}"/></span>
 							</div>
 						</div>
-
-						<div class="card card-primary card-outline">
-							<div class="card-body">
-								<h5 class="card-title">Card title</h5>
-
-								<p class="card-text">
-									Some quick example text to build on the card title and make up the bulk of the card's
-									content.
-								</p>
-								<a href="#" class="card-link">Card link</a>
-								<a href="#" class="card-link">Another link</a>
-							</div>
-						</div><!-- /.card -->
-					</div>
-					<!-- /.col-md-6 -->
-					<div class="col-lg-6">
-						<div class="card">
-							<div class="card-header">
-								<h5 class="m-0">Featured</h5>
-							</div>
-							<div class="card-body">
-								<h6 class="card-title">Special title treatment</h6>
-
-								<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-								<a href="#" class="btn btn-primary">Go somewhere</a>
-							</div>
-						</div>
-
-						<div class="card card-primary card-outline">
-							<div class="card-header">
-								<h5 class="m-0">Featured</h5>
-							</div>
-							<div class="card-body">
-								<h6 class="card-title">Special title treatment</h6>
-
-								<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-								<a href="#" class="btn btn-primary">Go somewhere</a>
+						<div class="card-footer">
+							<form role="form" method="post">
+								<input type="hidden" name="article_no" value="${article.article_no}">
+							</form>
+							<button type="submit" class="btn btn-primary listBtn"><i class="fa fa-list"></i> 목록</button>
+							<div class="float-right">
+								<button type="submit" class="btn btn-warning modBtn"><i class="fa fa-edit"></i> 수정</button>
+								<button type="submit" class="btn btn-danger delBtn"><i class="fa fa-trash"></i> 삭제</button>
 							</div>
 						</div>
 					</div>
-					<!-- /.col-md-6 -->
 				</div>
-				<!-- /.row -->
 			</div><!-- /.container-fluid -->
 		</div>
 		<!-- /.content -->
@@ -119,5 +90,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- REQUIRED SCRIPTS -->
 	<%@include file="../include/plugin_js.jsp" %>
+	
+	<script>
+	$(document).ready(function () {
+		
+		var formObj = $("form[role='form']");
+		console.log(formObj);
+		
+		$(".modBtn").on("click", function () {
+			formObj.attr("action", "${path}/article/modify");
+			formObj.attr("method", "get"); formObj.submit();
+		});
+		
+		$(".delBtn").on("click", function () {
+			formObj.attr("action", "${path}/article/remove");
+			formObj.submit();
+		});
+		
+		$(".listBtn").on("click", function () {
+			self.location = "${path}/article/list"
+		});
+	});
+
+	</script>
 </body>
 </html>

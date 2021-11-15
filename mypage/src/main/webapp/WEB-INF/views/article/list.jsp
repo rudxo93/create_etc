@@ -38,64 +38,42 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		<!-- Main content -->
 		<div class="content">
 			<div class="container-fluid">
-				<div class="row">
-					<div class="col-lg-6">
-						<div class="card">
-							<div class="card-body">
-								<h5 class="card-title">Card title</h5>
-
-								<p class="card-text">
-									Some quick example text to build on the card title and make up the bulk of the card's
-									content.
-								</p>
-
-								<a href="#" class="card-link">Card link</a>
-								<a href="#" class="card-link">Another link</a>
-							</div>
+				<div class="col-lg-12">
+					<div class="card">
+						<div class="card-header">
+							<h3 class="card-title">게시글 목록</h3>
 						</div>
-
-						<div class="card card-primary card-outline">
-							<div class="card-body">
-								<h5 class="card-title">Card title</h5>
-
-								<p class="card-text">
-									Some quick example text to build on the card title and make up the bulk of the card's
-									content.
-								</p>
-								<a href="#" class="card-link">Card link</a>
-								<a href="#" class="card-link">Another link</a>
-							</div>
-						</div><!-- /.card -->
-					</div>
-					<!-- /.col-md-6 -->
-					<div class="col-lg-6">
-						<div class="card">
-							<div class="card-header">
-								<h5 class="m-0">Featured</h5>
-							</div>
-							<div class="card-body">
-								<h6 class="card-title">Special title treatment</h6>
-
-								<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-								<a href="#" class="btn btn-primary">Go somewhere</a>
-							</div>
+						<div class="card-body">
+							<table class="table table-bordered">
+								<tbody>
+								<tr>
+									<th style="width: 30px">#</th>
+									<th>제목</th>
+									<th style="width: 100px">작성자</th>
+									<th style="width: 150px">작성시간</th>
+									<th style="width: 60px">조회</th>
+								</tr>
+								<c:forEach items="${articles}" var="article">
+								<tr>
+									<td>${article.article_no}</td>
+									<td><a href="${path}/article/read?article_no=${article.article_no}">${article.title}</a></td>
+									<td>${article.writer}</td>
+									<td><fmt:formatDate value="${article.regDate}" pattern="yyyy-MM-dd a HH:mm"/></td>
+									<td><span class="badge bg-red">${article.viewCnt}</span></td>
+								</tr>
+								</c:forEach>
+								</tbody>
+							</table>
 						</div>
-
-						<div class="card card-primary card-outline">
-							<div class="card-header">
-								<h5 class="m-0">Featured</h5>
-							</div>
-							<div class="card-body">
-								<h6 class="card-title">Special title treatment</h6>
-
-								<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-								<a href="#" class="btn btn-primary">Go somewhere</a>
+						<div class="card-footer">
+							<div class="float-right">
+								<button type="button" class="btn btn-success btn-flat" id="writeBtn">
+									<i class="fa fa-pencil"></i> 글쓰기
+								</button>
 							</div>
 						</div>
 					</div>
-					<!-- /.col-md-6 -->
 				</div>
-				<!-- /.row -->
 			</div><!-- /.container-fluid -->
 		</div>
 		<!-- /.content -->
@@ -119,5 +97,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- REQUIRED SCRIPTS -->
 	<%@include file="../include/plugin_js.jsp" %>
+	
+	<script type="text/javascript">
+		var result = "${msg}";
+		if (result == "regSuccess") {
+			
+			alert("게시글 등록이 완료되었습니다.");
+			
+		} else if (result == "modSuccess") {
+			
+			alert("게시글 수정이 완료되었습니다.");
+			
+		} else if (result == "delSuccess") {
+			
+			alert("게시글 삭제가 완료되었습니다.");
+			
+		}
+
+	</script>
 </body>
 </html>
