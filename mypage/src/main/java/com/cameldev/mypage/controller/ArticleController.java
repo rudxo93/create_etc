@@ -28,7 +28,7 @@ public class ArticleController {
 	}
 	
 	// 등록 페이지 이동
-	@RequestMapping(value = "write", method = RequestMethod.GET)
+	@RequestMapping(value = "/write", method = RequestMethod.GET)
 	public String writerGET() {
 		
 		logger.info("write GET ...");
@@ -37,19 +37,19 @@ public class ArticleController {
 	}
 	
 	// 등록 처리
-	@RequestMapping(value = "write", method = RequestMethod.POST)
+	@RequestMapping(value = "/write", method = RequestMethod.POST)
 	public String writePOST(ArticleVO articleVO, RedirectAttributes redirectAttributes) throws Exception {
 		
 		logger.info("write POST ...");
 		logger.info(articleVO.toString());
-		articleService.create(articleVO);
+		articleService.create(articleVO);;
 		redirectAttributes.addFlashAttribute("msg", "regSuccess");
 		
 		return "redirect:/article/list";
 	}
 	
 	// 목록 페이지 이동
-	@RequestMapping(value = "list", method = RequestMethod.GET)
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model) throws Exception {
 		
 		logger.info("list ...");
@@ -59,7 +59,7 @@ public class ArticleController {
 	}
 	
 	// 조회 페이지 이동
-	@RequestMapping(value = "read", method = RequestMethod.GET)
+	@RequestMapping(value = "/read", method = RequestMethod.GET)
 	public String read(@RequestParam("article_no") int article_no, Model model) throws Exception {
 		
 		logger.info("read ...");
@@ -69,7 +69,7 @@ public class ArticleController {
 	}
 	
 	// 수정 페이지 이동
-	@RequestMapping(value = "modify", method = RequestMethod.GET)
+	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public String modifyGEt (@RequestParam("article_no") int article_no, Model model) throws Exception {
 		
 		logger.info("modifyGet  ...");
@@ -79,7 +79,7 @@ public class ArticleController {
 	}
 	
 	// 수정 처리
-	@RequestMapping(value = "modify", method = RequestMethod.POST)
+	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public String modifyPOST(ArticleVO articleVO, RedirectAttributes redirectAttributes ) throws Exception {
 		
 		logger.info("modifyPOST ...");
@@ -90,7 +90,7 @@ public class ArticleController {
 	}
 	
 	// 삭제 처리
-	@RequestMapping(value = "remove", method = RequestMethod.POST)
+	@RequestMapping(value = "/remove", method = RequestMethod.POST)
 	public String remove(@RequestParam("article_no") int article_no, RedirectAttributes redirectAttributes) throws Exception {
 		
 		logger.info("remove ...");

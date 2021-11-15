@@ -23,8 +23,9 @@ public class ArticleDAOImpl implements ArticleDAO {
 
 	@Override
 	public void create(ArticleVO articleVO) throws Exception {
-		session.insert(NAME_SPACE + ".create", articleVO);
+		session.insert(NAME_SPACE + ".create", articleVO); 
 	}
+
 
 	@Override
 	public ArticleVO read(Integer article_no) throws Exception {
