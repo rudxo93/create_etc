@@ -12,7 +12,7 @@ import com.cameldev.mypage.domain.ArticleVO;
 @Repository
 public class ArticleDAOImpl implements ArticleDAO {
 
-	private static final String NAME_SPACE = "com.cameldev.mypage.mappers.article.ArticleMapper";
+	private static final String NAME_SPACE = "com.cameldev.mypage.mappers.article.articleMapper";
 	
 	private final SqlSession session;
 	
