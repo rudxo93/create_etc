@@ -13,7 +13,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<!-- /.navbar -->
 
 	<!-- Main Sidebar Container -->
-		<%@include file="include/left_column.jsp" %>
+		<%@include file="include/left_column.jsp" %> 
 
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
