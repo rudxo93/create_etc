@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.cameldev.mypage.commons.paging.Criteria;
 import com.cameldev.mypage.domain.ArticleVO;
 
 @Repository
@@ -46,5 +47,25 @@ public class ArticleDAOImpl implements ArticleDAO {
 	public List<ArticleVO> listAll() throws Exception {
 		return session.selectList(NAME_SPACE + ".listAll");
 	}
+	
+	// 페이징 처리
+	@Override 
+	public List<ArticleVO> listPaging(int page) throws Exception { 
+		
+		if (page <= 0) { 
+			page = 1; 
+		} 
+		
+		page = (page - 1) * 10; 
+		
+		return session.selectList(NAME_SPACE + ".listPaging", page); 
+	}
+	
+	@Override
+	public List<ArticleVO> listCriteria(Criteria criteria) throws Exception {
+		return session.selectList(NAME_SPACE + ".listCriteria", criteria);
+	}
+	
+	
 	
 }

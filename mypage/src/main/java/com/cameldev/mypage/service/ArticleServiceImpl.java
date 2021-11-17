@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
+import com.cameldev.mypage.commons.paging.Criteria;
 import com.cameldev.mypage.domain.ArticleVO;
 import com.cameldev.mypage.persistence.ArticleDAO;
 
@@ -43,6 +44,11 @@ public class ArticleServiceImpl implements ArticleService{
 	@Override
 	public List<ArticleVO> listAll() throws Exception {
 		return articleDAO.listAll();
+	}
+
+	@Override
+	public List<ArticleVO> listCriteria(Criteria criteria) throws Exception {
+		return articleDAO.listCriteria(criteria);
 	}
 	
 }

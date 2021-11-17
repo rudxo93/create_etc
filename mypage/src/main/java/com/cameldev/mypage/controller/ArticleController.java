@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.cameldev.mypage.commons.paging.Criteria;
+import com.cameldev.mypage.commons.paging.PageMaker;
 import com.cameldev.mypage.domain.ArticleVO;
 import com.cameldev.mypage.service.ArticleService;
 
@@ -99,7 +101,34 @@ public class ArticleController {
 		
 		return "redirect:/article/list";
 	}
+	
+	// 페이징 요청
+	@RequestMapping(value = "/listCriteria", method = RequestMethod.GET)
+	public String listCriteria(Model model, Criteria criteria) throws Exception{
+		
+		logger.info("listCriteria ...");
+		model.addAttribute("articles", articleService.listCriteria(criteria));
+		
+		return "/article/list_criteria";
+		
+	}
+	
+	@RequestMapping(value = "/listPaging", method = RequestMethod.GET) 
+	public String listPaging(Model model, Criteria criteria) throws Exception { 
+		
+		logger.info("listPaging ..."); 
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCriteria(criteria); 
+		pageMaker.setTotalCount(1000); 
+		
+		model.addAttribute("articles", articleService.listCriteria(criteria)); 
+		model.addAttribute("pageMaker", pageMaker); 
+		
+		return "/article/list_paging"; 
+	}
+
 }
+
 
 
 
