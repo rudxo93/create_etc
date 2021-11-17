@@ -1,5 +1,8 @@
 package com.cameldev.mypage.commons.paging;
 
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+
 public class PageMaker {
 	
 	private int totalCount; // 전체 게시글 수 
@@ -41,6 +44,15 @@ public class PageMaker {
 		prev = startPage == 1 ? false : true;  // 1페이지면 누를수 없도록
 		
 		next = endPage * criteria.getPerPageNum() >= totalCount ? false : true; 
+	}
+	
+	public String makeQuery(int page) {
+		UriComponents uriComponents = UriComponentsBuilder.newInstance()
+				.queryParam("page", page)
+				.queryParam("perPageNum", criteria.getPerPageNum())
+				.build();
+		
+		return uriComponents.toUriString();
 	}
 
 	public int getStartPage() {
