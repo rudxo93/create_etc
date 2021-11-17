@@ -133,5 +133,16 @@
 			#{perPageNum} 
 		]]> 
 	</select>
+	
+	<select id="countArticles" resultType="int">
+		<![CDATA[
+		select
+			count(article_no)
+		from
+			tb_article
+		where
+			article_no > 0
+		]]>
+	</select>
 
 </mapper>

@@ -60,6 +60,14 @@
 									<p>List Page</p>
 								</a>
 							</li>
+								<!-- List Paging 목록 버튼 추가 -->
+							<li class="nav-item">
+								<a href="${path}/article/listPaging" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>List Paging Page</p>
+								</a>
+							</li>
+							<!-- ------------------------- -->
 						</ul>
 					</li>
 					<li class="nav-item">
