@@ -61,6 +61,17 @@ public class ArticleController {
 		return "/article/list";
 	}
 	
+	// 페이징 요청
+	@RequestMapping(value = "/listCriteria", method = RequestMethod.GET)
+	public String listCriteria(Model model, Criteria criteria) throws Exception{
+		
+		logger.info("listCriteria ...");
+		model.addAttribute("articles", articleService.listCriteria(criteria));
+		
+		return "/article/list_criteria";
+		
+	}
+
 	// 조회 페이지 이동
 	@RequestMapping(value = "/read", method = RequestMethod.GET)
 	public String read(@RequestParam("article_no") int article_no, Model model) throws Exception {
@@ -101,82 +112,6 @@ public class ArticleController {
 		redirectAttributes.addFlashAttribute("msg", "delSuccess");
 		
 		return "redirect:/article/list";
-	}
-	
-	// 페이징 요청
-	@RequestMapping(value = "/listCriteria", method = RequestMethod.GET)
-	public String listCriteria(Model model, Criteria criteria) throws Exception{
-		
-		logger.info("listCriteria ...");
-		model.addAttribute("articles", articleService.listCriteria(criteria));
-		
-		return "/article/list_criteria";
-		
-	}
-	
-	@RequestMapping(value = "/listPaging", method = RequestMethod.GET)
-	public String listPaging(Model model, Criteria criteria) throws Exception {
-		
-		logger.info("listPaging...");
-		
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCriteria(criteria);
-		// 수정
-		pageMaker.setTotalCount(articleService.countArticle(criteria));
-		
-		model.addAttribute("articles", articleService.listCriteria(criteria));
-		model.addAttribute("pageMaker", pageMaker);
-		
-		return "/article/list_paging";
-	}
-	
-	@RequestMapping(value = "/readPaging", method = RequestMethod.GET)
-	public String readPaging(@RequestParam("article_no") int article_no,
-										@ModelAttribute("criteria") Criteria criteria,
-										Model model) throws Exception {
-		
-		model.addAttribute("article", articleService.read(article_no));
-		
-		return "/article/read_paging";
-		
-	}
-
-	@RequestMapping(value = "/modifyPaging", method = RequestMethod.GET)
-	public String modifyGETPaging(@RequestParam("article_no") int article_no,
-												@ModelAttribute("criteria") Criteria criteria, Model model) throws Exception {
-		
-		logger.info("modifyGetPaging...");
-		model.addAttribute("article", articleService.read(article_no));
-		
-			return "/article/modify_paging";
-		
-	}
-	
-	@RequestMapping(value = "/modifyPaging", method = RequestMethod.POST)
-	public String modifyPOSTPaging(ArticleVO articleVO, Criteria criteria,
-													RedirectAttributes redirectAttributes) throws Exception {
-		
-		logger.info("modifyPostPaging...");
-		articleService.update(articleVO);
-		redirectAttributes.addAttribute("page", criteria.getPage());
-		redirectAttributes.addAttribute("perPageNum", criteria.getPerPageNum());
-		redirectAttributes.addFlashAttribute("msg", "modSuccess");
-		
-		return "redirect:/article/listPaging";
-		
-	}
-	
-	public String removePaging(@RequestParam("article_no") int article_no,
-											Criteria criteria, RedirectAttributes redirectAttributes) throws Exception {
-		
-		logger.info("remove...");
-		articleService.delete(article_no);
-		redirectAttributes.addAttribute("page", criteria.getPage());
-		redirectAttributes.addAttribute("perPageNum", criteria.getPerPageNum());
-		redirectAttributes.addFlashAttribute("msg", "delSuccess");
-		
-		return "redirect:/article/listPaging";
-		
 	}
 	
 }
