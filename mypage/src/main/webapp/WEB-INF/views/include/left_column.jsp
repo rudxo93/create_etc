@@ -86,6 +86,30 @@
 							</li>
 						</ul>
 					</li>
+					<li class="nav-item has-treeview menu-open">
+						<a href="#" class="nav-link">
+							<i class="nav-icon fas fa-tachometer-alt"></i>
+							<p>
+								Paging Search Board
+								<i class="right fas fa-angle-left"></i>
+							</p>
+						</a>
+						<ul class="nav nav-treeview">
+							<li class="nav-item">
+								<a href="${path}/article/paging/search/write" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>Write Page</p>
+								</a>
+							</li>
+							<!-- List Paging 목록 버튼 추가 -->
+							<li class="nav-item">
+								<a href="${path}/article/paging/search/list" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>List Paging Search Page</p>
+								</a>
+							</li>
+						</ul>
+					</li>
 				</ul>
 			</nav><!-- /.sidebar-menu -->
 		</div><!-- /.sidebar -->

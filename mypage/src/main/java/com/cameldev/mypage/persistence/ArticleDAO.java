@@ -3,6 +3,7 @@ package com.cameldev.mypage.persistence;
 import java.util.List;
 
 import com.cameldev.mypage.commons.paging.Criteria;
+import com.cameldev.mypage.commons.paging.SearchCriteria;
 import com.cameldev.mypage.domain.ArticleVO;
 
 public interface ArticleDAO {
@@ -29,4 +30,9 @@ public interface ArticleDAO {
 	
 	int countArticles(Criteria criteria) throws Exception;
 
+	List<ArticleVO> listSearch(SearchCriteria searchCriteria) throws Exception;
+	
+	int countSearchedArticles(SearchCriteria searchCriteria) throws Exception;
+
+	
 }

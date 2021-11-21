@@ -60,8 +60,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						<div class="card-footer">
 							<form role="form" method="post">
 								<input type="hidden" name="article_no" value="${article.article_no}"> 
-								<input type="hidden" name="page" value="${criteria.page}">
-								<input type="hidden" name="perPageNum" value="${criteria.perPageNum}">
+								<input type="hidden" name="page" value="${searchCriteria.page}">
+								<input type="hidden" name="perPageNum" value="${searchCriteria.perPageNum}">
+								<input type="hidden" name="searchType" value="${searchCriteria.searchType}">
+								<input type="hidden" name="keyword" value="${searchCriteria.keyword}">
 							</form>
 							<button type="submit" class="btn btn-primary listBtn"><i class="fa fa-list"></i> 목록</button>
 							<div class="pull-right">
@@ -101,21 +103,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		var formObj = $("form[role='form']");
 		console.log(formObj);
 		
-		$(".modBtn").on("click", function () { 
-			formObj.attr("action", "${path}/article/modifyPaging");
+		$(".modBtn").on("click", function () {
+			formObj.attr("action", "${path}/article/paging/search/modify");
 			formObj.attr("method", "get");
 			formObj.submit();
 		});
 		
 		$(".delBtn").on("click", function () {
-			formObj.attr("action", "${path}/article/removePaging");
-			formObj.submit(); 
+			formObj.attr("action", "${path}/article/paging/search/remove");
+			formObj.submit();
 		});
 		
 		$(".listBtn").on("click", function () {
+			formObj.attr("action", "${path}/article/paging/search/list");
 			formObj.attr("method", "get");
-			formObj.attr("action", "${path}/article/listPaging");
-			formObj.submit(); 
+			formObj.submit();
 		});
 	});
 

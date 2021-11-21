@@ -29,6 +29,7 @@ public class ArticlePagingController {
 		this.articleService = articleService;
 	}
 	
+	// 등록 페이지 이동
 	@RequestMapping(value = "/write", method = RequestMethod.GET)
 	public String writeGET() {
 		
@@ -37,6 +38,7 @@ public class ArticlePagingController {
 		return "article/paging/write";
 	}
 	
+	// 등록 처리
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
 	public String writePOST(ArticleVO articleVO, RedirectAttributes redirectAttributes) throws Exception {
 		
@@ -47,6 +49,7 @@ public class ArticlePagingController {
 		return "redirect:/article/paging/list";
 	}
 	
+	// 목록 페이지 이동
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model, Criteria criteria) throws Exception {
 		
@@ -61,6 +64,7 @@ public class ArticlePagingController {
 		return "article/paging/list";
 	}
 	
+	// 조회 페이지 이동
 	@RequestMapping(value = "/read", method = RequestMethod.GET)
 	public String read(@RequestParam("article_no") int article_no,
 								@ModelAttribute("criteria") Criteria criteria, Model model) throws Exception {
@@ -71,6 +75,7 @@ public class ArticlePagingController {
 		return "article/paging/read";
 	}
 	
+	// 수정 페이지 이동
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public String modifyGET(@RequestParam("article_no") int article_no,
 										@ModelAttribute("criteria") Criteria criteria, Model model) throws Exception {
@@ -81,6 +86,7 @@ public class ArticlePagingController {
 		return "article/paging/modify";
 	}
 	
+	// 수정 처리
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public String modifyPOST(ArticleVO articleVO, Criteria criteria,
 										RedirectAttributes redirectAttributes) throws Exception {
@@ -94,6 +100,7 @@ public class ArticlePagingController {
 		return "redirect:/article/paging/list";
 	}
 	
+	// 삭제 처리
 	@RequestMapping(value = "/remove", method = RequestMethod.POST)
 	public String remove(@RequestParam("article_no") int article_no,
 									Criteria criteria, RedirectAttributes redirectAttributes) throws Exception {

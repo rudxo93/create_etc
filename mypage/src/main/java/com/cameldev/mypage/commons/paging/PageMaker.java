@@ -1,7 +1,12 @@
 package com.cameldev.mypage.commons.paging;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import jdk.jfr.internal.consumer.StringParser.Encoding;
 
 public class PageMaker {
 	
@@ -10,7 +15,7 @@ public class PageMaker {
 	private int endPage;  // 게시글 번호에 따른 페이지의 마지막번호
 	private boolean prev; // 이전 버튼을 누를 수 있는 경우/없는 경우 분류를 위해서
 	private boolean next;
-	private int tempEndPage;
+	private int tempEndPage; // 실제 데이터 수에 필요한 페이지
 	
 	private int displayPageNum = 10; // 하단 페이지 번호의 갯수 
 	
@@ -53,6 +58,32 @@ public class PageMaker {
 				.build();
 		
 		return uriComponents.toUriString();
+	}
+	
+	public String makeSearch(int page) {
+		
+		UriComponents uriComponents = UriComponentsBuilder.newInstance()
+														.queryParam("page", page)
+														.queryParam("pagePageNum", criteria.getPerPageNum())
+														.queryParam("searchType", ((SearchCriteria) criteria).getSearchType())
+														.queryParam("keyword", encoding(((SearchCriteria)criteria).getKeyword()))
+														.build();
+		
+		return uriComponents.toUriString();
+		
+	}
+	
+	private String encoding(String keyword) {
+		
+		if(keyword == null || keyword.trim().length() == 0) {
+			return "";
+		}
+		
+		try {
+			return URLEncoder.encode(keyword, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			return "";
+		}
 	}
 
 	public int getStartPage() {
@@ -110,7 +141,5 @@ public class PageMaker {
 	public Criteria getCriteria() {
 		return criteria;
 	}
-
-	
 
 }
