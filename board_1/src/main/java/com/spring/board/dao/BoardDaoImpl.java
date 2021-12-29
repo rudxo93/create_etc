@@ -26,4 +26,9 @@ public class BoardDaoImpl implements BoardDao {
 		session.selectOne(NAME_SPACE + "write", boardVO);
 	}
 	
+	@Override
+	public BoardVO view(int bno) throws Exception {
+		return session.selectOne(NAME_SPACE + "view", bno);
+	}
+	
 }

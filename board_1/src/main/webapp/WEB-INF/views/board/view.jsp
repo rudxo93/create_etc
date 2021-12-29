@@ -5,17 +5,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 조회</title>
+<title>Insert title here</title>
 </head>
 <body>
 	<form method="post">
 		<label>제목</label>
-		<input type="text" name="title"><br>
+		<input type="text" name="title" value="${view.title }"><br>
 		<label>작성자</label>
-		<input type="text" name="writer"><br>
+		<input type="text" name="writer" value="${view.writer }"><br>
 		<label>내용</label>
-		<textarea rows="5" cols="50" name="content"></textarea><br>
-		<button type="submit">작성완료</button>
+		<textarea rows="5" cols="50" name="content">${view.content }</textarea><br>
 	</form>
 </body>
 </html>

@@ -16,7 +16,7 @@
 		from
 			tbl_board
 	</select>
-	
+	<!-- 게시글 작성 -->
 	<insert id="write" parameterType="com.spring.board.domain.BoardVO">
 		insert into
 			tbl_board(
@@ -29,4 +29,18 @@
 				#{writer}
 			)
 	</insert>
+	<!--  게시글 조회 -->
+	<select id="view" parameterType="Integer" resultType="com.spring.board.domain.BoardVO">
+		select
+			bno,
+			title,
+			content,
+			writer,
+			regDate,
+			viewCnt
+		from
+			tbl_board
+		where
+			bno = #{bno}
+	</select>
 </mapper>
