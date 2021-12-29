@@ -23,12 +23,17 @@ public class BoardDaoImpl implements BoardDao {
 	
 	@Override
 	public void write(BoardVO boardVO) throws Exception {
-		session.selectOne(NAME_SPACE + "write", boardVO);
+		session.insert(NAME_SPACE + "write", boardVO);
 	}
 	
 	@Override
 	public BoardVO view(int bno) throws Exception {
 		return session.selectOne(NAME_SPACE + "view", bno);
+	}
+	
+	@Override
+	public void modify(BoardVO boardVO) throws Exception {
+		session.update(NAME_SPACE + "modify", boardVO);
 	}
 	
 }

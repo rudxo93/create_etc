@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>게시글 수정</title>
 </head>
 <body>
 	<form method="post">
@@ -15,9 +15,7 @@
 		<input type="text" name="writer" value="${view.writer }"><br>
 		<label>내용</label>
 		<textarea rows="5" cols="50" name="content">${view.content }</textarea><br>
-		<div>
-			<a href="/board/modify?bno=${view.bno }">게시글 수정</a>
-		</div>
+		<button type="submit">수정완료</button>
 	</form>
 </body>
 </html>
