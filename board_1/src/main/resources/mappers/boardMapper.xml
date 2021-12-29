@@ -5,15 +5,28 @@
   
 <mapper namespace="com.spring.board.dao.BoardDao">
 <!-- 게시글 목록 -->
-<select id="list" resultType="com.spring.board.domain.BoardVO">
-	select
-		bno,
-		title,
-		content,
-		writer,
-		regDate,
-		viewCnt
-	from
-		tbl_board
-</select>
+	<select id="list" resultType="com.spring.board.domain.BoardVO">
+		select
+			bno,
+			title,
+			content,
+			writer,
+			regDate,
+			viewCnt
+		from
+			tbl_board
+	</select>
+	
+	<insert id="write" parameterType="com.spring.board.domain.BoardVO">
+		insert into
+			tbl_board(
+				title,
+				content,
+				writer
+			) values(
+				#{title},
+				#{content},
+				#{writer}
+			)
+	</insert>
 </mapper>

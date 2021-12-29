@@ -7,5 +7,6 @@ import com.spring.board.domain.BoardVO;
 public interface BoardDao {
 
 	public List<BoardVO> list() throws Exception; // 게시글 목록
+	public void write(BoardVO boardVO) throws Exception;// 게시글 작성
 	
 }

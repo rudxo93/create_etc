@@ -7,12 +7,15 @@
 	<title>Home</title>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
+	<h1>
+		Hello world!  
+	</h1>
 
-<P>  The time on the server is ${serverTime}. </P>
-
-<p><a href="/board/list">게시글 목록</a></p>
+	<P>  The time on the server is ${serverTime}. </P>
+	
+	<p>
+		<a href="/board/list">게시글 목록</a><br>
+		<a href="/board/write">게시글 작성</a>
+	</p>
 </body>
 </html>

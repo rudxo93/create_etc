@@ -21,4 +21,9 @@ public class BoardDaoImpl implements BoardDao {
 		return session.selectList(NAME_SPACE + "list");
 	}
 	
+	@Override
+	public void write(BoardVO boardVO) throws Exception {
+		session.selectOne(NAME_SPACE + "write", boardVO);
+	}
+	
 }
