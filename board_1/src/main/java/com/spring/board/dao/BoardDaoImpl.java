@@ -57,4 +57,29 @@ public class BoardDaoImpl implements BoardDao {
 		
 		return session.selectList(NAME_SPACE + "listPage", data);
 	}
+	
+	@Override
+	public List<BoardVO> listPageSearch(int displayPost, int postNum, String searchType, String keyword) throws Exception {
+		
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		
+		data.put("searchType", searchType);
+		data.put("keyword", keyword);
+		
+		return session.selectList(NAME_SPACE + "listPageSearch", data);
+	}
+	
+	@Override
+	public int searchCount(String searchType, String keyword) throws Exception {
+		
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		
+		data.put("searchType", searchType);
+		data.put("keyword", keyword);
+		
+		return session.selectOne(NAME_SPACE + "searchCount", data);
+	}
 }
