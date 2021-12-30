@@ -8,6 +8,11 @@
 <title>게시글 수정</title>
 </head>
 <body>
+
+	<div id="nav">
+		<%@include file="../include/nav.jsp" %>
+	</div>
+
 	<form method="post">
 		<label>제목</label>
 		<input type="text" name="title" value="${view.title }"><br>

@@ -34,4 +34,19 @@ public class BoardServiceImpl implements BoardService {
 		boardDao.modify(boardVO);
 	}
 	
+	@Override
+	public void delete(int bno) throws Exception {
+		boardDao.delete(bno);
+	}
+	
+	@Override
+	public int count() throws Exception {
+		return boardDao.count();
+	}
+	
+	@Override
+	public List<BoardVO> listPage(int displayPost, int postNum) throws Exception {
+		return boardDao.listPage(displayPost, postNum);
+	}
+	
 }

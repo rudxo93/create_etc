@@ -1,5 +1,6 @@
 package com.spring.board.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -36,4 +37,24 @@ public class BoardDaoImpl implements BoardDao {
 		session.update(NAME_SPACE + "modify", boardVO);
 	}
 	
+	@Override
+	public void delete(int bno) throws Exception {
+		session.delete(NAME_SPACE + "delete", bno);
+	}
+	
+	@Override
+	public int count() throws Exception {
+		return session.selectOne(NAME_SPACE + "count");
+	}
+	
+	@Override
+	public List<BoardVO> listPage(int displayPost, int postNum) throws Exception {
+		
+		HashMap<String, Integer> data = new HashMap<String, Integer>();
+		
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		
+		return session.selectList(NAME_SPACE + "listPage", data);
+	}
 }

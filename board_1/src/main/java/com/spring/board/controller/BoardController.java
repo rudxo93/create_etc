@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.board.domain.BoardVO;
+import com.spring.board.domain.Page;
 import com.spring.board.service.BoardService;
 
 @Controller
@@ -64,11 +65,37 @@ public class BoardController {
 	}
 	
 	//게시물 수정
-		@RequestMapping(value = "/modify", method = RequestMethod.POST)
-		public String modifyPost(BoardVO boardVO) throws Exception {
+	@RequestMapping(value = "/modify", method = RequestMethod.POST)
+	public String modifyPost(BoardVO boardVO) throws Exception {
 			
-			boardService.modify(boardVO);
+		boardService.modify(boardVO);
 			
-			return "redirect:/board/view?bno=" + boardVO.getBno();
-		}
+		return "redirect:/board/view?bno=" + boardVO.getBno();
+	}
+	
+	// 게시글 삭제
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public String getDelete(@RequestParam("bno") int bno) throws Exception {
+		
+		boardService.delete(bno);
+		
+		return "redirect:/board/list";
+	}
+	
+	// 게시글 목록 + 페이징 추가
+	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
+	public void getListPage(Model model, @RequestParam("num") int num) throws Exception {
+		
+		Page page = new Page();
+		
+		page.setNum(num);
+		page.setCount(boardService.count());
+				
+		List<BoardVO> list = null;
+		list = boardService.listPage(page.getDisplayPost(), page.getPostNum());
+		model.addAttribute("list", list);
+		model.addAttribute("page", page);		
+		//현재 페이지
+		model.addAttribute("select", num);
+	}
 }

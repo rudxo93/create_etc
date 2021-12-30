@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.spring.board.dao.BoardDao">
-<!-- 게시글 목록 -->
+	<!-- 게시글 목록 -->
 	<select id="list" resultType="com.spring.board.domain.BoardVO">
 		select
 			bno,
@@ -16,6 +16,7 @@
 		from
 			tbl_board
 	</select>
+	
 	<!-- 게시글 작성 -->
 	<insert id="write" parameterType="com.spring.board.domain.BoardVO">
 		insert into
@@ -29,6 +30,7 @@
 				#{writer}
 			)
 	</insert>
+	
 	<!--  게시글 조회 -->
 	<select id="view" parameterType="Integer" resultType="com.spring.board.domain.BoardVO">
 		select
@@ -43,6 +45,7 @@
 		where
 			bno = #{bno}
 	</select>
+	
 	<!-- 게시글 수정 -->
 	<update id="modify" parameterType="com.spring.board.domain.BoardVO">
 		update
@@ -54,4 +57,38 @@
 		where
 			bno = #{bno}
 	</update>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="delete" parameterType="Integer">
+		delete from
+			tbl_board
+		where
+			bno = #{bno}
+	</delete>
+	
+	<!-- 게시글 총 갯수 -->
+	<select id="count" resultType="Integer">
+		select
+			count(bno)
+		from
+			tbl_board
+	</select>
+	
+	<!-- 게시글 목록 + 페이징 -->
+	<select id="listPage" parameterType="hashMap" resultType="com.spring.board.domain.BoardVO">
+		select
+			bno,
+			title,
+			writer,
+			regDate,
+			viewCnt
+		from
+			tbl_board
+		order by
+			bno desc
+		limit
+			#{displayPost}, #{postNum}
+	</select>
+	
+	
 </mapper>
