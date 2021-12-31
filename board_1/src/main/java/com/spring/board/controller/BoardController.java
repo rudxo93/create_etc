@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.board.domain.BoardVO;
 import com.spring.board.domain.Page;
+import com.spring.board.domain.ReplyVO;
 import com.spring.board.service.BoardService;
+import com.spring.board.service.ReplyService;
 
 @Controller
 @RequestMapping("/board/")
@@ -19,6 +21,9 @@ public class BoardController {
 	
 	@Autowired
 	private BoardService boardService;
+	
+	@Autowired
+	private ReplyService replyService;
 
 	// 게시글 목록
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -53,6 +58,11 @@ public class BoardController {
 		BoardVO boardVO = boardService.view(bno);
 		
 		model.addAttribute("view", boardVO);
+		
+		// 댓글 조회
+		List<ReplyVO> reply = null;
+		reply = replyService.list(bno);
+		model.addAttribute("reply", reply);
 	}
 	
 	//게시물 수정
@@ -122,4 +132,5 @@ public class BoardController {
 		model.addAttribute("select", num);
 		
 	}
+	
 }
